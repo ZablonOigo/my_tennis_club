@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="{% static 'css/search.css'%}">
+    <title>Search</title>
+</head>
+<body>
+   <div class="container">
+    <div class="card">
+        {% if search %}
+        <h1>you searched for {{searched}}</h1>
+    
+        {% for data in mydata %}
+      <a href="{% url 'members:detail'%}"> {{data.firstname}}{{data.lastname}}</a><br>
+        {% endfor %}
+    
+        {% else %}
+        <h1>No record found</h1>
+        {% endif %}
+    </div>
+   </div>
+
+</body>
+</html>

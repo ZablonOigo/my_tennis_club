@@ -1,0 +1,128 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background-color:#B9D9EB ;
+   
+}
+.container{
+    max-width: 800px;
+    margin: auto;
+    background-color:#6CB4EE;
+    height: 100vh;
+}
+nav{
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #00308F;
+    padding: 20px;
+    border-bottom: 2px solid #002D62;
+}
+.title a{
+    text-decoration: none;
+    color: #fff;
+    margin: 4px;
+    font-size:large;
+    font-weight: 800;
+
+}
+.title a:hover{
+    color :crimson;
+    transition: all  2s ease;
+}
+input{
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    margin: 2px;
+}
+input[type=submit]{
+    background-color: rgb(58, 179, 118);
+    color: #ffff;
+    font-weight: 600;
+
+}
+input[type=submit]:hover{
+    background-color: rgb(40, 250, 145);
+}
+.content{
+    width: 350px;
+    background-color: #ffffff;
+    box-shadow: 0px 5px 15px rgba(0,0,0,0.8);
+    border-radius: 10px;
+    border: none;
+    /* padding: 20px; */
+    margin: 30px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.login ul{
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    list-style: none;
+}
+.login ul li a{
+    margin: 4px;
+    text-decoration: none;
+    padding: 10px;
+    color: #ffff;
+    background-color:rgb(58, 179, 118) ;
+    border-radius: 10px;
+    font-weight: 600;
+}
+.login ul li a:hover{
+    background-color:rgb(40, 250, 145);
+}
+.content{
+    background-color: #EDEADE;
+}
+.content h2{
+    width: 100%;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    text-align: center;
+    margin-bottom: 10px;
+    padding: 20px;
+    background-color:#13274F;
+    color: #fff;
+}
+.content ul{
+    width: 100%;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+.content ul li{
+    background-image: linear-gradient(to right, #375BDC, #4D70EF);
+    background-size: 50px 60px;
+    background-color: #ffffff;
+    margin: 6px;
+    text-align: center;
+    display:block;
+    background-repeat: no-repeat;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform .25s;
+    list-style: none;
+    padding: 10px;
+    padding-left: 70px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+}
+.content ul li a{
+    text-decoration: none;
+    color: #000;
+    font-size: 20px;
+    font-weight: 800;
+}
+.content ul li a:hover {
+    transform: scale(1.1);
+  }
