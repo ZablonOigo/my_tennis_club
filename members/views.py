@@ -16,7 +16,7 @@ def detail(request,id):
 def search(request):
     if request.method == 'POST':
         searched=request.POST['searched']
-        mydata=Member.objects.filter(firstname='Emil').values() | Member.objects.filter(Q(firstname='maggy') | Q(firstname='wright')).values()
+        mydata=Member.objects.filter(entry__firstname__name__isnull=True)
         return render(request, 'members/search.html',{'searched':searched,'mydata':mydata})
 
     else:
