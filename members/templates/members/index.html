@@ -17,11 +17,11 @@
         </div>
    
  
-    <form action="{% url 'members:search' %}" method="post">
+    <form action="{% url 'members:search' %} " method="get">
         {% csrf_token %}
         <div class="search">
-          <input type="search" name="searched">  
-          <input type="submit"  value="Search" required>
+          <input type="text" name="q">  
+          <input type="submit"  value="Search">
         </div>
      </form>
      <div class="login">
@@ -32,6 +32,7 @@
      </div>
     </nav>
     <div class="content">
+        <a href="{% url 'members:register'%}">New Member</a>
     <h2>Members</h2>
     {% for i in mydata %}
     <ul>

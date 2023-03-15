@@ -10,18 +10,7 @@
 </head>
 <body>
    <div class="container">
-    <div class="card">
-        {% if search %}
-        <h1>you searched for {{searched}}</h1>
-    
-        {% for data in mydata %}
-      <a href="{% url 'members:detail'%}"> {{data.firstname}}{{data.lastname}}</a><br>
-        {% endfor %}
-    
-        {% else %}
-        <h1>No record found.....</h1>
-        {% endif %}
-    </div>
+<a href="{% url   'members:detail' %}">{{data}}</a>
    </div>
 
 </body>
