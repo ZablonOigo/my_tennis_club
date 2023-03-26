@@ -10,9 +10,9 @@
 </head>
 <body>
    <div class="container">
-      {% if object_list %}
+      {% if data %}
       <ul>
-         {% for x in object_list %}
+         {% for x in data %}
             <li><a href="{% url 'members:detail' x.id%}">{{x.firstname}}  {{x.lastname}}</a></li>
          {% endfor %}
       </ul>

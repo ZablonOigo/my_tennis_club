@@ -23,15 +23,28 @@ def search(request):
     }    
     return render(request,'members/search.html', context)
 from django.views.generic import ListView
-class SearchView(ListView):
-    model=Member
-    template_name='members/search.html'
-    def query_set(self):
-        query=self.request.GET.get('q')
-        object_list=Member.objects.filter(Q(firstname__icontains=query)|
-                                     Q(lastname__icontains=query))
+# class SearchView(ListView):
+#     model=Member
+#     template_name='members/search.html'
+#     def query_set(self):
+#         query=self.request.GET.get('q')
+#         object_list=Member.objects.filter(Q(firstname__icontains=query)|
+#                                      Q(lastname__icontains=query))
         
-        return object_list
+#         return object_list
+
+def search(request):
+    if request.method=='POST':
+        searched=request.POST['q']
+        data=Member.objects.filter(Q(firstname__contains=searched)|Q(
+            lastname__contains=searched
+        ))
+        context={'searched':searched ,'data':data }
+        return render(request,'members/search.html', context)
+    
+    else:
+           return render(request,'members/search.html')
+
 
 from .forms import MemberForm
 def register(request):

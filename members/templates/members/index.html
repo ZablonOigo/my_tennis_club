@@ -17,7 +17,7 @@
         </div>
    
  
-    <form action="{% url 'members:search' %} " method="get">
+    <form action="{% url 'members:search' %} " method="post">
         {% csrf_token %}
         <div class="search">
           <input type="text" name="q" required/>  
