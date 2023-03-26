@@ -12,7 +12,7 @@ body{
     max-width: 800px;
     margin: auto;
     background-color:#6CB4EE;
-    height: 100vh;
+    height: 100%;
 }
 nav{
     
@@ -57,7 +57,7 @@ input[type=submit]:hover{
     border-radius: 10px;
     border: none;
     /* padding: 20px; */
-    margin: 30px auto;
+    margin:  auto;
     display: flex;
     justify-content: center;
     align-items: center;

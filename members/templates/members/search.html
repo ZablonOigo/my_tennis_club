@@ -5,21 +5,24 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <link rel="stylesheet" href="{% static 'css/search.css'%}">
+     <link rel="stylesheet" href="{% static 'css/search.css' %}">
     <title>Search</title>
 </head>
 <body>
    <div class="container">
+     <div class="card">
       {% if data %}
       <ul>
          {% for x in data %}
-            <li><a href="{% url 'members:detail' x.id%}">{{x.firstname}}  {{x.lastname}}</a></li>
-         {% endfor %}
+            <li><a href="{% url 'members:detail' x.id%}"><h2>You searched for {{x.firstname}}  {{x.lastname}}....</h2></a></li>
+            <a class=" reverse" href="{% url 'members:index' %}">Go back</a>
+            {% endfor %}
       </ul>
      {% else %}
-     No record found....
+     <h1>Sorry No record found....</h1>
      {% endif %}
        
+     </div>
    </div>
 
 </body>
