@@ -30,3 +30,23 @@ def sign_out(request):
     logout(request)
     messages.success(request,'You have logged out')
     return redirect ('user:login')
+
+
+def register(request):
+    if request.method =='GET':
+        form=RegisterForm()
+        context={'form':form}
+        return render(request, 'user/register.html',context)
+    elif request.method =='POST':
+        form=RegisterForm(request.POST)
+        if form.is_valid():
+            user=form.save(commit=False)
+            user.username=user.username.lower()
+            context={'form':form}
+            user.save()
+            messages.success(request,'You have signed up successfully')
+            login(request,user)
+            return redirect('members:index')
+        else:
+         return render(request,'user/register.html',context)
+    

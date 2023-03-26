@@ -2,26 +2,27 @@ from django.shortcuts import render, get_object_or_404,redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from . models import Member
 from django.db.models import Q
+from django.contrib.auth.decorators import login_required
 
 def index(request):
     mydata=Member.objects.all()
     context={'mydata':mydata}
     return render(request, 'members/index.html', context)
-
+@login_required
 def detail(request,id):
     data=get_object_or_404(Member,pk=id)
     context={'data':data}
     return render(request, 'members/detail.html', context)
-def search(request):
-    if 'q' in request.GET:
-        q=request.GET['q']
-        data=Member.objects.filter(firstname__icontains=q)
-    else:
-        data=Member.objects.all()
-    context={
-        'data':data
-    }    
-    return render(request,'members/search.html', context)
+# def search(request):
+#     if 'q' in request.GET:
+#         q=request.GET['q']
+#         data=Member.objects.filter(firstname__icontains=q)
+#     else:
+#         data=Member.objects.all()
+#     context={
+#         'data':data
+#     }    
+#     return render(request,'members/search.html', context)
 from django.views.generic import ListView
 # class SearchView(ListView):
 #     model=Member
@@ -32,7 +33,7 @@ from django.views.generic import ListView
 #                                      Q(lastname__icontains=query))
         
 #         return object_list
-
+@login_required
 def search(request):
     if request.method=='POST':
         searched=request.POST['q']
@@ -62,6 +63,7 @@ def register(request):
            return render(request, 'members/new_member.html', context)
        
 from django.contrib import messages
+@login_required
 def delete_member(request,id):
      mydata=get_object_or_404(Member,id=id)
      context={'mydata':mydata}
@@ -73,7 +75,7 @@ def delete_member(request,id):
          messages.success(request,'Member was removed')
          return redirect('members:index')
      
-
+@login_required
 def update_member(request,id):
     post=get_object_or_404(Member,id=id)
     context={'form':MemberForm(instance=post),'id':id}
