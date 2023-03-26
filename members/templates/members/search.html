@@ -10,7 +10,16 @@
 </head>
 <body>
    <div class="container">
-<a href="{% url   'members:detail' %}">{{data}}</a>
+      {% if object_list %}
+      <ul>
+         {% for x in object_list %}
+            <li><a href="{% url 'members:detail' x.id%}">{{x.firstname}}  {{x.lastname}}</a></li>
+         {% endfor %}
+      </ul>
+     {% else %}
+     No record found....
+     {% endif %}
+       
    </div>
 
 </body>

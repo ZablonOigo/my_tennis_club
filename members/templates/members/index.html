@@ -20,7 +20,7 @@
     <form action="{% url 'members:search' %} " method="get">
         {% csrf_token %}
         <div class="search">
-          <input type="text" name="q">  
+          <input type="text" name="q" required/>  
           <input type="submit"  value="Search">
         </div>
      </form>
@@ -37,6 +37,9 @@
     {% for i in mydata %}
     <ul>
         <li><a href="{% url 'members:detail' i.id%}">{{i.firstname}}  {{i.lastname}}</a></li>
+        <li><a href="{% url 'members:delete' i.id%}">Delete</a></li>
+        <li><a href="{% url 'members:update' i.id%}">Update</a></li>
+
     </ul>
     {% endfor %}
   </div>

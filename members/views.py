@@ -12,25 +12,6 @@ def detail(request,id):
     data=get_object_or_404(Member,pk=id)
     context={'data':data}
     return render(request, 'members/detail.html', context)
-
-
-# def search(request):
-#     query_dict=request.GET
-#     query=query_dict("q")
-#     search_obj=None
-#     if id is not None:
-#         search_obj=Member.objects.get(pk=query)
-#     context={"data":search_obj}
-#     return render(request,'members/search.html',context)
-# Create your views here.
-# from django.views.generic import ListView
-# class SearchView(ListView):
-#     model=Member
-#     template='members/search.html'
-#     context_object_name='search'
-#     def get_queryset(self):
-#         query=self.request.GET.get('q')
-#         return Member.objects.filter(firstname__icontains=query)
 def search(request):
     if 'q' in request.GET:
         q=request.GET['q']
@@ -41,17 +22,64 @@ def search(request):
         'data':data
     }    
     return render(request,'members/search.html', context)
+from django.views.generic import ListView
+class SearchView(ListView):
+    model=Member
+    template_name='members/search.html'
+    def query_set(self):
+        query=self.request.GET.get('q')
+        object_list=Member.objects.filter(Q(firstname__icontains=query)|
+                                     Q(lastname__icontains=query))
+        
+        return object_list
+
 from .forms import MemberForm
 def register(request):
-   form=MemberForm()
-   if request.method == 'POST':
+   if request.method =='GET':
+       form=MemberForm()
+       context={'form':form}
+       return render(request, 'members/new_member.html', context)
+   elif request.method == 'POST':
        form=MemberForm(request.POST)
        if form.is_valid():
-        # firstname = form.cleaned_data['firstname'],  
-        # lastname = form.cleaned_data['lastname'],  
-        # gender = form.cleaned_data['gender'],  
-        # joined_date=  form.cleaned_data['joined_date']  
+        context={'form':form}   
         form.save()
-        return  redirect('/')
-   context={'form':form}   
-   return render(request, 'members/new_member.html', context)
+        return  redirect('members:index')
+       else:
+           return render(request, 'members/new_member.html', context)
+       
+from django.contrib import messages
+def delete_member(request,id):
+     mydata=get_object_or_404(Member,id=id)
+     context={'mydata':mydata}
+     if request.method =='GET':
+         return render(request,'members/delete_confirm.html',context)
+     
+     elif request.method =='POST':
+         mydata.delete()
+         messages.success(request,'Member was removed')
+         return redirect('members:index')
+     
+
+def update_member(request,id):
+    post=get_object_or_404(Member,id=id)
+    context={'form':MemberForm(instance=post),'id':id}
+    if request.method =='GET':
+        return render(request,'members/new_member.html',context)
+    elif request.method =='POST':
+        form=MemberForm(request.POST,instance=post)
+        if form.is_valid():
+         context={'form':form}
+         form.save()
+         messages.success(request,'Updated sucessfully')
+         return redirect('members:index')
+        else:
+            return render(request,'members/new_member.html',context) 
+         
+     
+    
+    
+    
+
+     
+   

@@ -1,23 +1,18 @@
-<!DOCTYPE html>
-{% load static %}
+1   <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/member.css'%}">
     <title>Document</title>
 </head>
 <body>
- <div class="container">
-    <h2>{%if id%}Edit {%else%}New{%endif%} member</h2>
+    
     <form action="" method="post">
         {% csrf_token %}
-        {{form}}
-        <input type="submit" value="submit">
+        <p>Are you sure you want to delete <strong>{{mydata.firstname}}  {{mydata.lastname}}</strong>  member?</p>
+        <input type="submit" value="Delete">
         <a href="{% url 'members:index' %}">Cancel</a>
     </form>
- </div>
-    
 </body>
 </html>
