@@ -18,11 +18,13 @@ def sign_in(request):
             user=authenticate(request, username=username, password=password)
             if user:
                 login(request,user)
-                messages.success(request,f'{username.firstame()}, Welcome back')
+                messages.success(request,f'{username.title()}, Welcome back')
                 return redirect('members:index')
             
 
-
+    else:
+        form=LoginForm()
+        context = {'form': form}
         messages.error(request,'Invalid username or password')
         return render(request,'user/login.html',context)    
 

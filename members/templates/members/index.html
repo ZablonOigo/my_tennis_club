@@ -46,8 +46,9 @@
     <h2>Members</h2>
     {% for i in mydata %}
     <ul>
-        {% if request.user.is_authenticated %}
+        
         <li><a href="{% url 'members:detail' i.id%}">{{i.firstname}}  {{i.lastname}}</a></li>
+        {% if request.user.is_authenticated %}
         <li><a href="{% url 'members:delete' i.id%}">Delete</a></li>
         <li><a href="{% url 'members:update' i.id%}">Update</a></li>
             {% endif %}
