@@ -24,6 +24,9 @@ input[type=submit]{
     border: none;
     padding: 12px;
 }
+input[type=submit]:hover{
+    background-color: darkgreen;
+}
 .container{
     width: 50%;
     max-width: 400px;
