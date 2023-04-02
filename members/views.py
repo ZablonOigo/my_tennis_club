@@ -10,8 +10,9 @@ def index(request):
     return render(request, 'members/index.html', context)
 @login_required
 def detail(request,id):
-    queryset=Member.objects.filter(firstname=request.user)
-    data=get_object_or_404(Member,pk=id)
+    queryset=Member.objects.filter(Q(firstname=request.user)|
+                                   Q(lastname=request.user))
+    data=get_object_or_404(queryset,pk=id)
     context={'data':data}
     return render(request, 'members/detail.html', context)
 # def search(request):
@@ -66,8 +67,9 @@ def register(request):
 from django.contrib import messages
 @login_required
 def delete_member(request,id):
-     queryset=Member.objects.filter(firstname=request.user)
-     mydata=get_object_or_404(Member,id=id)
+     queryset=Member.objects.filter(Q(firstname=request.user)|
+                                   Q(lastname=request.user))
+     mydata=get_object_or_404(queryset,id=id)
      context={'mydata':mydata}
      if request.method =='GET':
          return render(request,'members/delete_confirm.html',context)
@@ -79,8 +81,9 @@ def delete_member(request,id):
      
 @login_required
 def update_member(request,id):
-    queryset=Member.objects.filter(firstname=request.user)
-    post=get_object_or_404(Member,id=id)
+    queryset=Member.objects.filter(Q(firstname=request.user)|
+                                   Q(lastname=request.user))
+    post=get_object_or_404(queryset,id=id)
     context={'form':MemberForm(instance=post),'id':id}
     if request.method =='GET':
         return render(request,'members/new_member.html',context)
